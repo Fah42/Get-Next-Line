@@ -6,61 +6,38 @@
 /*   By: fhadhri <fhadhri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:48:14 by fhadhri           #+#    #+#             */
-/*   Updated: 2022/05/21 19:57:40 by fhadhri          ###   ########.fr       */
+/*   Updated: 2022/05/24 21:52:24 by fhadhri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-ft_get_read_size(fd, tab, nbyte)
-{
-	int	d;
-
-	buffer_size = 0;
-	nbyte = 5;
-	d = read(fd, tab, nbyte);
-	if (!fd || fd <= 0 || fd > 1023)
-		return (NULL);
-	while (i != 0)
-	{
-		i = read(fd, tab, nbyte);
-		buffer_size += i;
-	}
-	return (buffer_size)
-}
-
 char	*get_next_line(int fd)
 {
-	char	*tab;
-	int		buffer_size;
-	int		nbyte;
+	int		sz;
+	int		BUFFER_SIZE;
+	char	*c;
 	int		i;
+	char	*str;
 
-	buffer_size = ft_get_read_size(fd, );
-	nbyte = 5;
-	i = read(fd, tab, nbyte);
-	if (!fd || fd <= 0 || fd > 1023)
-		return (NULL);
-	while (i != 0)
+	str = (char *) malloc(sizeof(char) * 1000000);
+	c = (char *) malloc(sizeof(char) * 1000000);
+	i = 0;
+	BUFFER_SIZE = 1;
+	sz = read(fd, c, BUFFER_SIZE);
+	c[sz] = '\0';
+	while (sz != 0)
 	{
-		i = read(fd, tab, nbyte);
-		buffer_size += i;
-	}
-	tab = (char *) malloc(sizeof(char) * buffer_size);
-	while (i != 0)
-	{
-		i = read(fd, tab, nbyte);
-		printf("value of i : %d\n", i);
-		printf("value of bufferSize : %d\n", buffer_size);
-		printf("%s", tab);
+		
+		printf("%c" ,c[i]);
+		i++;
 	}
 }
 
-int	main(void)
+int main()
 {
-	int 	fd, sz;
-	char 	*c = (char *) calloc(100, sizeof(char));
+	int fd;
 
 	fd = open("LOL.txt", O_RDONLY);
 	get_next_line(fd);
-}
+} 
