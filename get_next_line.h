@@ -6,7 +6,7 @@
 /*   By: fhadhri <fhadhri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:49:55 by fhadhri           #+#    #+#             */
-/*   Updated: 2022/05/20 21:30:34 by fhadhri          ###   ########.fr       */
+/*   Updated: 2022/06/20 14:36:27 by fhadhri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,11 @@
 # include <fcntl.h>
 
 char	*get_next_line(int fd);
+size_t	ft_strlen(const char *s);
+char	*ft_strjoin(char const *s1, char const *s2);
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 5
+# endif
 
 #endif

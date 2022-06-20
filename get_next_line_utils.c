@@ -6,13 +6,11 @@
 /*   By: fhadhri <fhadhri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:51:58 by fhadhri           #+#    #+#             */
-/*   Updated: 2022/05/20 22:28:46 by fhadhri          ###   ########.fr       */
+/*   Updated: 2022/06/20 14:21:27 by fhadhri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-
 
 size_t	ft_strlen(const char *s)
 {
