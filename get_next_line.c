@@ -6,46 +6,66 @@
 /*   By: fhadhri <fhadhri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:48:14 by fhadhri           #+#    #+#             */
-/*   Updated: 2022/06/20 14:55:02 by fhadhri          ###   ########.fr       */
+/*   Updated: 2022/06/21 15:03:32 by fhadhri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include "get_next_line.h"
 
-char	*get_next_line(int fd)
+int	checkn(char *str)
 {
-	int			i;
-	int			c_size;
-	int			string_size;
-	static char	c[BUFFER_SIZE + 1];
-	char		*string;
+	int	i;
 
 	i = 0;
-	c_size = 0;
-	string_size = 0;
-	read(fd, c, BUFFER_SIZE);
-	c_size = ft_strlen(c);
-	c[c_size + 1] = '\0';
-	while (string[i] != '\n')
+	while (str[i])
 	{
-		string = ft_strjoin(string, c);
-		read(fd, c, BUFFER_SIZE);
+		if (str[i] == '\n')
+			return (1);
 		i++;
 	}
-	string_size = ft_strlen(string);
-	printf("%d\n", string_size);
-	printf("%s", string);
+	return (0);
+}
+
+char	*get_next_line(int fd)
+{
+	int			rr;
+	static char	sstr[BUFFER_SIZE + 1];
+	char		*string;
+
+	rr = 1;
+	while (rr != 0)
+	{
+		if(checkn(sstr) == 0)
+		{
+			rr = read(fd, sstr, BUFFER_SIZE);
+			sstr[rr] = '\0';
+			string = ft_strjoin(string, sstr);
+			printf("string vaut = %s\n", string);
+		}
+		else
+		{
+			//rr = read(fd, sstr, BUFFER_SIZE);
+			break ;
+		}
+	}
 	return (string);
 }
 
 int	main(void)
 {
 	int	fd;
+	char *ligne;
 
 	fd = open("LOL.txt", O_RDONLY);
-	// printf("%s", get_next_line(fd));
-	// printf("%s", get_next_line(fd));
-	get_next_line(fd);
+	ligne = get_next_line(fd);
+	printf("1e ligne = [%s]", ligne);
+	// free(ligne);
+	ligne = get_next_line(fd);
+	printf("2e ligne = [%s]", ligne);
+free(ligne);
+	// get_next_line(fd);
+	// get_next_line(fd);
+	// get_next_line(fd);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fhadhri <fhadhri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:51:58 by fhadhri           #+#    #+#             */
-/*   Updated: 2022/06/20 14:21:27 by fhadhri          ###   ########.fr       */
+/*   Updated: 2022/06/21 15:06:48 by fhadhri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ft_strchr(const char *s, int c)
 		return (NULL);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *string, char const *sstr)
 {
 	char	*dest;
 	int		max;
@@ -56,21 +56,28 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	j = 0;
 	i = 0;
-	max = ft_strlen(s1) + ft_strlen(s2);
+	max = ft_strlen(string) + ft_strlen(sstr);
 	dest = (char *) malloc(sizeof(char) * max + 1);
-	while (s1[i])
+	while (string[i])
 	{
-		dest[j] = s1[i];
+		dest[j] = string[i];
 		i++;
 		j++;
 	}
 	i = 0;
-	while (s2[i])
+	while (sstr[i] && sstr[i] != '\n')
 	{
-		dest[j] = s2[i];
+		dest[j] = sstr[i];
 		i++;
 		j++;
 	}
+	if (sstr[i] == '\n')
+	{
+		dest[j] = sstr[i];
+		j++;
+	}
+	printf("sstr vaut = %s\n", sstr);
 	dest[j] = '\0';
+	printf("dest vaut = %s\n", dest);
 	return (dest);
 }
