@@ -6,7 +6,7 @@
 /*   By: fhadhri <fhadhri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:51:58 by fhadhri           #+#    #+#             */
-/*   Updated: 2022/06/21 15:06:48 by fhadhri          ###   ########.fr       */
+/*   Updated: 2022/06/23 15:21:49 by fhadhri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,70 +14,46 @@
 
 size_t	ft_strlen(const char *s)
 {
-	const char	*str;
-	int			i;
+	size_t	i;
 
 	i = 0;
-	str = s;
-	while (str[i] != '\0')
-	{
+	if (s == NULL)
+		return (i);
+	while (s[i] != '\0')
 		i++;
-	}
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	unsigned char	d;
-	const char		*ss;
-	int				i;
-
-	d = (unsigned char)c;
-	ss = s;
-	i = 0;
-	while (ss[i] != '\0')
-	{
-		if (ss[i] == d)
-			return ((char *)&s[i]);
-	i++;
-	}
-	if (ss[i] == d)
-		return ((char *)&s[i]);
-	else
-		return (NULL);
-}
-
-char	*ft_strjoin(char const *string, char const *sstr)
-{
-	char	*dest;
-	int		max;
+	char	*new_str;
 	int		i;
 	int		j;
 
+	i = 0;
 	j = 0;
-	i = 0;
-	max = ft_strlen(string) + ft_strlen(sstr);
-	dest = (char *) malloc(sizeof(char) * max + 1);
-	while (string[i])
+	if (!s1 || !s2)
+		return (NULL);
+	new_str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (new_str == NULL)
+		return (NULL);
+	while (s1[i])
 	{
-		dest[j] = string[i];
+		new_str[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+	{
+		new_str[i] = s2[j];
 		i++;
 		j++;
 	}
-	i = 0;
-	while (sstr[i] && sstr[i] != '\n')
-	{
-		dest[j] = sstr[i];
-		i++;
-		j++;
-	}
-	if (sstr[i] == '\n')
-	{
-		dest[j] = sstr[i];
-		j++;
-	}
-	printf("sstr vaut = %s\n", sstr);
-	dest[j] = '\0';
-	printf("dest vaut = %s\n", dest);
-	return (dest);
+	new_str[i] = '\0';
+	return (new_str);
+}
+
+void	safe_free(char *str)
+{
+	free(str);
+	str = NULL;
 }

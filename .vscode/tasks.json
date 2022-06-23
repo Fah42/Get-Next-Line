@@ -1,0 +1,29 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: gcc-11 générer le fichier actif",
+            "command": "/usr/bin/gcc-11",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "/home/fah/Documents/Perso/Get-Next-Line/get_next_line.c",
+                "/home/fah/Documents/Perso/Get-Next-Line/get_next_line_utils.c",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Tâche générée par le débogueur."
+        }
+    ],
+    "version": "2.0.0"
+}
