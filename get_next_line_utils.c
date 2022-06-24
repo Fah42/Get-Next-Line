@@ -6,7 +6,7 @@
 /*   By: fhadhri <fhadhri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:51:58 by fhadhri           #+#    #+#             */
-/*   Updated: 2022/06/23 15:21:49 by fhadhri          ###   ########.fr       */
+/*   Updated: 2022/06/24 13:02:00 by fhadhri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (new_str);
 }
 
-void	safe_free(char *str)
+void	free_set_nul(char *str)
 {
 	free(str);
 	str = NULL;
