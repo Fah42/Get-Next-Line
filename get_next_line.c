@@ -6,7 +6,7 @@
 /*   By: fhadhri <fhadhri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:48:14 by fhadhri           #+#    #+#             */
-/*   Updated: 2022/06/24 17:49:11 by fhadhri          ###   ########.fr       */
+/*   Updated: 2022/06/27 10:10:01 by fhadhri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,9 +142,9 @@ int	main(void)
 	printf("1e ligne = %s\n", ligne);
 	free(ligne);
 	ligne = get_next_line(fd);
-	printf("2e ligne = %s", ligne);
+	printf("2e ligne = %s\n", ligne);
 	free(ligne);
-	// ligne = get_next_line(fd);
-	// printf("3e ligne = %s", ligne);
+	ligne = get_next_line(fd);
+	printf("3e ligne = %s", ligne);
 	return (0);
 }
