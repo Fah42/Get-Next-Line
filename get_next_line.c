@@ -6,13 +6,13 @@
 /*   By: fhadhri <fhadhri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:48:14 by fhadhri           #+#    #+#             */
-/*   Updated: 2022/06/27 10:10:01 by fhadhri          ###   ########.fr       */
+/*   Updated: 2022/07/26 13:31:36 by fhadhri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_prev(const char *str)
+static char	*ft_prev(const char *str)
 {
 	int		i;
 	char	*string;
@@ -40,7 +40,7 @@ char	*ft_prev(const char *str)
 	return (string);
 }
 
-char	*ft_next(char *str)
+static char	*ft_next(char *str)
 {
 	int		n;
 	int		i;
@@ -59,7 +59,7 @@ char	*ft_next(char *str)
 	n = ft_strlen(str);
 	string = malloc((n - i) * sizeof(char));
 	if (string == NULL)
-		return (NULL);
+		return (ft_free(str));
 	n = 0;
 	i++;
 	while (str[i] != '\0')
@@ -69,7 +69,7 @@ char	*ft_next(char *str)
 	return (string);
 }
 
-int	ft_newline(const char *str)
+static int	ft_newline(const char *str)
 {
 	int	i;
 
@@ -85,12 +85,15 @@ int	ft_newline(const char *str)
 	return (0);
 }
 
-char	*ft_read(int fd, char *buffer, char *tmp, char *str)
+static char	*ft_read(int fd, char *buffer, char *tmp, char *str)
 {
 	int	bytes_read;
 
+	bytes_read = 1;
 	while (1)
 	{
+		if (str != NULL && (ft_newline(str) == 1 || bytes_read == 0))
+			break ;
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
 		{
@@ -106,8 +109,6 @@ char	*ft_read(int fd, char *buffer, char *tmp, char *str)
 		}
 		str = ft_strjoin(tmp, buffer);
 		free(tmp);
-		if (ft_newline(str) == 1 || bytes_read == 0)
-			break ;
 	}
 	free(buffer);
 	return (str);
@@ -115,36 +116,39 @@ char	*ft_read(int fd, char *buffer, char *tmp, char *str)
 
 char	*get_next_line(int fd)
 {
-	static char	*str;
+	static char	*str = NULL;
 	char		*buffer;
 	char		*ligne;
 	char		*tmp;
 
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (buffer == NULL)
-		return (NULL);
+		return (ft_free(str));
 	tmp = NULL;
 	str = ft_read(fd, buffer, tmp, str);
 	if (str == NULL)
-		return (NULL);
+		return (ft_free(str));
 	ligne = ft_prev(str);
+	if (ligne == NULL)
+		return (ft_free(str));
 	str = ft_next(str);
 	return (ligne);
 }
 
+#include <stdio.h>
 int	main(void)
 {
-	int	fd;
-	char *ligne;
+	int		fd;
+	char	*ligne;
 
 	fd = open("LOL.txt", O_RDONLY);
+	(void)fd;
 	ligne = get_next_line(fd);
-	printf("1e ligne = %s\n", ligne);
-	free(ligne);
-	ligne = get_next_line(fd);
-	printf("2e ligne = %s\n", ligne);
-	free(ligne);
-	ligne = get_next_line(fd);
-	printf("3e ligne = %s", ligne);
+	while (ligne != NULL)
+	{
+		printf("%s", ligne);
+		free(ligne);
+		ligne = get_next_line(fd);
+	}
 	return (0);
 }

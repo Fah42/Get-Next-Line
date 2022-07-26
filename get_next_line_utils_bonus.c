@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhadhri <fhadhri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/20 16:51:58 by fhadhri           #+#    #+#             */
-/*   Updated: 2022/07/26 13:31:36 by fhadhri          ###   ########.fr       */
+/*   Created: 2022/07/16 11:55:40 by fhadhri           #+#    #+#             */
+/*   Updated: 2022/07/26 13:31:32 by fhadhri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -50,10 +50,4 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	new_str[i] = '\0';
 	return (new_str);
-}
-
-char	*ft_free(char *str)
-{
-	free(str);
-	return (NULL);
 }
